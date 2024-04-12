@@ -54,6 +54,7 @@ function search() {
 function loadMore() {
   currentPage++;
   search();
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
 }
 
 function loadPrevious() {
