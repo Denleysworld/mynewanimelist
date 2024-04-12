@@ -30,6 +30,12 @@ function search() {
         animeResults.innerHTML = "<p>No results found.</p>";
       }
 
+      if (currentPage > 1) {
+        document.getElementById('load-previous-btn').style.display = 'block';
+      } else {
+        document.getElementById('load-previous-btn').style.display = 'none';
+      }
+
       if (data.data.length < resultsPerPage) {
         document.getElementById('load-more-btn').style.display = 'none';
       } else {
@@ -48,11 +54,22 @@ function loadMore() {
   search();
 }
 
+function loadPrevious() {
+  if (currentPage > 1) {
+    currentPage--;
+    search();
+  }
+}
+
 function clearResults() {
   document.getElementById('anime-name').value = '';
   document.getElementById('animeResults').innerHTML = '';
+  document.getElementById('load-previous-btn').style.display = 'none';
+  document.getElementById('load-more-btn').style.display = 'none';
+  currentPage = 1;
 }
 
 document.getElementById('search-btn').addEventListener('click', search);
 document.getElementById('clear-btn').addEventListener('click', clearResults);
 document.getElementById('load-more-btn').addEventListener('click', loadMore);
+document.getElementById('load-previous-btn').addEventListener('click', loadPrevious);
