@@ -27,7 +27,7 @@ function search() {
       });
 
       if (data.data.length === 0) {
-        animeResults.innerHTML = "<p>No results found.</p>";
+        animeResults.innerHTML = "<p>No more results go back.</p>";
       }
 
       if (currentPage > 1) {
@@ -41,6 +41,8 @@ function search() {
       } else {
         document.getElementById('load-more-btn').style.display = 'block';
       }
+
+      document.getElementById('page-number').textContent = `Page ${currentPage}`;
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
