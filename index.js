@@ -4,7 +4,6 @@ const resultsPerPage = 1;
 
 function search() {
   const animeName = document.getElementById("anime-name").value;
-  document.getElementById("anime-name").value = "";
   fetch(
     `${url}/anime?q=${animeName}&page=${currentPage}&limit=${resultsPerPage}`
   )
