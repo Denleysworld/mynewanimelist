@@ -50,7 +50,7 @@ function search() {
         "page-number"
       ).textContent = `Page ${currentPage}`;
 
-      // Scroll to the top of the results
+      // Scrolling to the top of the results
       animeResults.scrollIntoView({ behavior: "smooth", block: "start" });
     })
     .catch((error) => {
