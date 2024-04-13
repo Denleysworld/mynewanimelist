@@ -1,0 +1,100 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Set position relative for absolute positioning */
+  min-height: 100vh; /* Ensure the body takes at least the height of the viewport */
+  background-image: url(https://thumbs.dreamstime.com/b/epic-storm-sky-dark-grey-clouds-background-texture-thunderstorm-159742076.jpg);
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.5); /* Add transparency to the header background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+main {
+  padding: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff; /* Set label text color to white */
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#animeResults {
+  text-align: center; /* Center the content of the results */
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.5); /* Add transparency to the footer background */
+  color: #fff;
+  padding: 10px 20px; /* Reduced padding for the footer */
+  text-align: right; /* Align page number to the right */
+  position: absolute; /* Position the footer absolutely */
+  width: 100%;
+  bottom: 0;
+}
+
+footer span {
+  font-size: 18px;
+}
+
+#load-more-btn,
+#load-previous-btn {
+  margin-top: 10px;
+  position: fixed;
+  bottom: 20px;
+}
+
+#load-more-btn {
+  right: 20px;
+}
+
+#load-previous-btn {
+  left: 20px;
+}

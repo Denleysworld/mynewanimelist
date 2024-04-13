@@ -1,9 +1,10 @@
 const url = 'https://api.jikan.moe/v4';
 let currentPage = 1;
-const resultsPerPage = 3;
+const resultsPerPage = 1;
 
 function search() {
   const animeName = document.getElementById('anime-name').value;
+  document.getElementById('anime-name').value = '';
   fetch(`${url}/anime?q=${animeName}&page=${currentPage}&limit=${resultsPerPage}`)
     .then(response => response.json())
     .then(data => {
@@ -27,22 +28,27 @@ function search() {
       });
 
       if (data.data.length === 0) {
-        animeResults.innerHTML = "<p>No more results go back.</p>";
-      }
-
-      if (currentPage > 1) {
+        animeResults.innerHTML = `
+          <p>No more results.</p>
+          <form id="post-form">
+            <label for="anime-title">Anime Title:</label><br>
+            <input type="text" id="anime-title" name="anime-title"><br>
+            <label for="synopsis">Synopsis:</label><br>
+            <textarea id="synopsis" name="synopsis"></textarea><br>
+            <button type="submit">Submit</button>
+          </form>
+        `;
         document.getElementById('load-previous-btn').style.display = 'block';
-      } else {
-        document.getElementById('load-previous-btn').style.display = 'none';
-      }
-
-      if (data.data.length < resultsPerPage) {
         document.getElementById('load-more-btn').style.display = 'none';
       } else {
+        document.getElementById('load-previous-btn').style.display = 'block';
         document.getElementById('load-more-btn').style.display = 'block';
       }
 
       document.getElementById('page-number').textContent = `Page ${currentPage}`;
+
+      // Scroll to the top of the results
+      animeResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -54,7 +60,6 @@ function search() {
 function loadMore() {
   currentPage++;
   search();
-  window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
 }
 
 function loadPrevious() {
@@ -72,7 +77,51 @@ function clearResults() {
   currentPage = 1;
 }
 
+function postData(event) {
+  event.preventDefault();
+  const formData = new FormData(document.getElementById('post-form'));
+  const animeTitle = formData.get('anime-title');
+  const synopsis = formData.get('synopsis');
+}
+
+  fetch('http://localhost:3000/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ animeTitle, synopsis })
+  })
+    .then(response => {
+      if (response.ok) {
+        alert('Data saved successfully!');
+      } else {
+        throw new Error('Failed to save data');
+      }
+    })
+    .catch(error => {
+      console.error('Error saving data:', error);
+      alert('Failed to save data. Please try again.');
+    });
+
+
+const bgMusic = document.getElementById('bg-music');
+
+
+function toggleBackgroundMusic() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
+}
+
+
+const header = document.querySelector('header');
+header.addEventListener('click', toggleBackgroundMusic);
+
+
 document.getElementById('search-btn').addEventListener('click', search);
 document.getElementById('clear-btn').addEventListener('click', clearResults);
 document.getElementById('load-more-btn').addEventListener('click', loadMore);
 document.getElementById('load-previous-btn').addEventListener('click', loadPrevious);
+document.getElementById('post-form').addEventListener('submit', postData);

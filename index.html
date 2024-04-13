@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <audio id="bg-music" src="mp3/background-music.mp3" loop autoplay></audio>
   <header>
     <h1>My Anime List</h1>
     <p>Dive into the amazing world of anime</p>
+    <h2>About</h2>
+    <p>This is a website made to ensure new and old anime fans <br> able to enjoy all the shows under their favorite franchise</p>
   </header>
   <main>
     <form id="search-form">
@@ -18,17 +21,23 @@
       <button type="button" id="search-btn">Search</button>
       <button type="button" id="clear-btn">Clear</button>
     </form>
-    <section id="animeResults"></section>
+    <section id="animeResults">
+      <h3>A Deep Dive</h3>
+    </section>
     <div id="pagination">
       <button type="button" id="load-previous-btn" style="display: none;">Load Previous</button>
       <span id="page-number">Page 1</span>
       <button type="button" id="load-more-btn" style="display: none;">Load More</button>
     </div>
+    <form id="post-form" style="display: none;">
+      <label for="anime-title">Anime Title:</label><br>
+      <input type="text" id="anime-title" name="anime-title"><br>
+      <label for="synopsis">Synopsis:</label><br>
+      <textarea id="synopsis" name="synopsis"></textarea><br>
+      <button type="submit">Submit</button>
+    </form>
   </main>
-  <footer>
-    <h2>About</h2>
-    <p>This is a website made to ensure new and old anime fans <br> able to enjoy all the shows under their favorite franchise</p>
-  </footer>
+
   <script src="index.js"></script>
 </body>
 </html>
