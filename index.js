@@ -1,20 +1,22 @@
-const url = 'https://api.jikan.moe/v4';
+const url = "https://api.jikan.moe/v4";
 let currentPage = 1;
 const resultsPerPage = 1;
 
 function search() {
-  const animeName = document.getElementById('anime-name').value;
-  document.getElementById('anime-name').value = '';
-  fetch(`${url}/anime?q=${animeName}&page=${currentPage}&limit=${resultsPerPage}`)
-    .then(response => response.json())
-    .then(data => {
-      const animeResults = document.getElementById('animeResults');
-      animeResults.innerHTML = ''; // Clear previous results
+  const animeName = document.getElementById("anime-name").value;
+  document.getElementById("anime-name").value = "";
+  fetch(
+    `${url}/anime?q=${animeName}&page=${currentPage}&limit=${resultsPerPage}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const animeResults = document.getElementById("animeResults");
+      animeResults.innerHTML = ""; // Clear previous results
 
-      data.data.forEach(item => {
+      data.data.forEach((item) => {
         const anime = item;
         const imageUrl = item.images;
-        const animeResultsDiv = document.createElement('div');
+        const animeResultsDiv = document.createElement("div");
         animeResultsDiv.innerHTML = `
           <p></p>
           <img src ="${imageUrl.jpg.image_url}">
@@ -38,22 +40,25 @@ function search() {
             <button type="submit">Submit</button>
           </form>
         `;
-        document.getElementById('load-previous-btn').style.display = 'block';
-        document.getElementById('load-more-btn').style.display = 'none';
+        document.getElementById("load-previous-btn").style.display = "block";
+        document.getElementById("load-more-btn").style.display = "none";
       } else {
-        document.getElementById('load-previous-btn').style.display = 'block';
-        document.getElementById('load-more-btn').style.display = 'block';
+        document.getElementById("load-previous-btn").style.display = "block";
+        document.getElementById("load-more-btn").style.display = "block";
       }
 
-      document.getElementById('page-number').textContent = `Page ${currentPage}`;
+      document.getElementById(
+        "page-number"
+      ).textContent = `Page ${currentPage}`;
 
       // Scroll to the top of the results
-      animeResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      animeResults.scrollIntoView({ behavior: "smooth", block: "start" });
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
-      const animeResults = document.getElementById('animeResults');
-      animeResults.innerHTML = "<p>An error occurred. Please try again later.</p>";
+      const animeResults = document.getElementById("animeResults");
+      animeResults.innerHTML =
+        "<p>An error occurred. Please try again later.</p>";
     });
 }
 
@@ -70,42 +75,20 @@ function loadPrevious() {
 }
 
 function clearResults() {
-  document.getElementById('anime-name').value = '';
-  document.getElementById('animeResults').innerHTML = '';
-  document.getElementById('load-previous-btn').style.display = 'none';
-  document.getElementById('load-more-btn').style.display = 'none';
+  document.getElementById("anime-name").value = "";
+  document.getElementById("animeResults").innerHTML = "";
+  document.getElementById("load-previous-btn").style.display = "none";
+  document.getElementById("load-more-btn").style.display = "none";
   currentPage = 1;
 }
 
 function postData(event) {
   event.preventDefault();
-  const formData = new FormData(document.getElementById('post-form'));
-  const animeTitle = formData.get('anime-title');
-  const synopsis = formData.get('synopsis');
+  const formData = new FormData(document.getElementById("post-form"));
+  const animeTitle = formData.get("anime-title");
+  const synopsis = formData.get("synopsis");
 }
-
-  fetch('http://localhost:3000/data', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ animeTitle, synopsis })
-  })
-    .then(response => {
-      if (response.ok) {
-        alert('Data saved successfully!');
-      } else {
-        throw new Error('Failed to save data');
-      }
-    })
-    .catch(error => {
-      console.error('Error saving data:', error);
-      alert('Failed to save data. Please try again.');
-    });
-
-
-const bgMusic = document.getElementById('bg-music');
-
+const bgMusic = document.getElementById("bg-music");
 
 function toggleBackgroundMusic() {
   if (bgMusic.paused) {
@@ -115,13 +98,13 @@ function toggleBackgroundMusic() {
   }
 }
 
+const header = document.querySelector("header");
+header.addEventListener("click", toggleBackgroundMusic);
 
-const header = document.querySelector('header');
-header.addEventListener('click', toggleBackgroundMusic);
-
-
-document.getElementById('search-btn').addEventListener('click', search);
-document.getElementById('clear-btn').addEventListener('click', clearResults);
-document.getElementById('load-more-btn').addEventListener('click', loadMore);
-document.getElementById('load-previous-btn').addEventListener('click', loadPrevious);
-document.getElementById('post-form').addEventListener('submit', postData);
+document.getElementById("search-btn").addEventListener("click", search);
+document.getElementById("clear-btn").addEventListener("click", clearResults);
+document.getElementById("load-more-btn").addEventListener("click", loadMore);
+document
+  .getElementById("load-previous-btn")
+  .addEventListener("click", loadPrevious);
+document.getElementById("post-form").addEventListener("submit", postData);
