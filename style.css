@@ -1,23 +1,21 @@
-/* Reset default browser styles */
-* {
+
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Global styles */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-size: cover;
   background-position: center;
-  position: relative; /* Set position relative for absolute positioning */
-  min-height: 100vh; /* Ensure the body takes at least the height of the viewport */
-  background-image: url(https://thumbs.dreamstime.com/b/epic-storm-sky-dark-grey-clouds-background-texture-thunderstorm-159742076.jpg);
+  position: relative; 
+  min-height: 100vh; 
+  background-image: url(img/1311951.jpg);
 }
 
 header {
-  background-color: rgba(0, 0, 0, 0.5); /* Add transparency to the header background */
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding: 20px;
   text-align: center;
